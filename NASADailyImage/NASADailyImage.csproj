@@ -21,4 +21,14 @@
       <Compile Include="obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Factory\Factory.csproj" />
+      <ProjectReference Include="..\NASANetworking\NASANetworking.csproj" />
+      <ProjectReference Include="..\NASAServices\NASAServices.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Util" />
+    </ItemGroup>
+
 </Project>

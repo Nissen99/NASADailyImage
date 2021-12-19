@@ -1,3 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Factory;
+using NASADailyImage;
 
-Console.WriteLine("Hello, World!");
+IBackGroundService backGroundService = FactoryNASAServices.GetBackGroundService();
+
+
+await backGroundService.GetImage();
+
+Console.WriteLine("Done");

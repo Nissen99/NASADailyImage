@@ -7,4 +7,18 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Content Include="obj\Debug\net6.0\NASADailyImage.AssemblyInfoInputs.cache" />
+      <Content Include="obj\Debug\net6.0\NASADailyImage.assets.cache" />
+      <Content Include="obj\Debug\net6.0\NASADailyImage.csproj.AssemblyReference.cache" />
+      <Content Include="obj\NASADailyImage.csproj.nuget.dgspec.json" />
+      <Content Include="obj\project.assets.json" />
+      <Content Include="obj\project.nuget.cache" />
+      <Content Include="obj\project.packagespec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+    </ItemGroup>
+
 </Project>

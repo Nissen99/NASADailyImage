@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASADailyImage", "NASADailyImage\NASADailyImage.csproj", "{75ADE2CA-D2A0-45A1-9FBD-1576A08AFA22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASANetworking", "NASANetworking\NASANetworking.csproj", "{B3A09C9D-8FC4-4D2F-BB36-2A5268F55953}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{75ADE2CA-D2A0-45A1-9FBD-1576A08AFA22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75ADE2CA-D2A0-45A1-9FBD-1576A08AFA22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75ADE2CA-D2A0-45A1-9FBD-1576A08AFA22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A09C9D-8FC4-4D2F-BB36-2A5268F55953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A09C9D-8FC4-4D2F-BB36-2A5268F55953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A09C9D-8FC4-4D2F-BB36-2A5268F55953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A09C9D-8FC4-4D2F-BB36-2A5268F55953}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -14,4 +14,4 @@ public class Credentials
     }
 ```
 
-There is also a relative path in BackGroundService, here create a jpg file and put in the path
+The projects is my first attempt at making something executable, therefore it is just a small fun project.  

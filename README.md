@@ -11,7 +11,7 @@ namespace NASANetworking;
 public class Credentials
 {
     public const string ApiKey = "Your_Key_Here";
-    }
+}
 ```
 
 The projects is my first attempt at making something executable, therefore it is just a small fun project.  

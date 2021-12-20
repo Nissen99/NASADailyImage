@@ -3,6 +3,8 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -25,10 +27,6 @@
       <ProjectReference Include="..\Factory\Factory.csproj" />
       <ProjectReference Include="..\NASANetworking\NASANetworking.csproj" />
       <ProjectReference Include="..\NASAServices\NASAServices.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Util" />
     </ItemGroup>
 
 </Project>

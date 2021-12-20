@@ -14,8 +14,6 @@ public class BackGroundService : IBackGroundService
     private const int SPI_SETDESKWALLPAPER = 20;
     private const int SPIF_UPDATEINIFILE = 0x01;
     private const int SPIF_SENDWININICHANGE = 0x02;
-    //Absolut path, could be made relative 
-    private const string FILE_PATH = @"C:\Users\Mikkel\RiderProjects\NASADailyImage\NASADailyImage\Util\Image.jpg";
     
     private INASADailyImageClient nasaClient;
     public BackGroundService(INASADailyImageClient nasaDailyImageClient)
@@ -39,19 +37,39 @@ public class BackGroundService : IBackGroundService
         ImageData newImageData = await nasaClient.GetImage();
 
         using WebClient webClient = new WebClient();
-
-        await webClient.DownloadFileTaskAsync(newImageData.HDUrl, FILE_PATH) ;
-    
         
-        //RegistryKey, used to set style, 2.ToString = Stretched
-        RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
-        key.SetValue(@"WallpaperStyle", 2.ToString());
+        var fullPath = MakeFileAndGetFullPath();
+
+        await webClient.DownloadFileTaskAsync(newImageData.HDUrl, fullPath) ;
+
+        setStyleOfWallpaper();
         
         SystemParametersInfo(SPI_SETDESKWALLPAPER,
             0,
-            FILE_PATH,
+            fullPath,
             SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
 
+       File.Delete(fullPath);
     }
-    
+
+    /**
+     * Abit of a workaround, but works i guess
+     */
+    private string MakeFileAndGetFullPath()
+    {
+        File.Create("Image.jpg").Dispose();
+
+        string fullPath = Path.GetFullPath("Image.jpg");
+        return fullPath;
+    }
+
+    /**
+     *  RegistryKey, used to set style
+     * 2.ToString = Stretched
+     */
+    private void setStyleOfWallpaper()
+    {
+        RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+        key.SetValue(@"WallpaperStyle", 2.ToString());
+    }
 }

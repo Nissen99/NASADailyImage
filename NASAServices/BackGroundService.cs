@@ -3,6 +3,8 @@ using Shared;
 using System.Net;
 
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.Win32;
 
 
@@ -36,9 +38,15 @@ public class BackGroundService : IBackGroundService
     {
         ImageData newImageData = await nasaClient.GetImage();
 
+        if ("video".Equals(newImageData.Media_type))
+        {
+            Console.WriteLine("Today was video");
+            return;
+        }
+        
         using WebClient webClient = new WebClient();
         
-        var fullPath = MakeFileAndGetFullPath();
+        var fullPath = MakeFileAndGetFullPath("Image.jpg");
 
         await webClient.DownloadFileTaskAsync(newImageData.HDUrl, fullPath) ;
 
@@ -52,14 +60,52 @@ public class BackGroundService : IBackGroundService
        File.Delete(fullPath);
     }
 
+    public async Task WriteExplanationAndTitle()
+    {
+        ImageData newImageData = await nasaClient.GetImage();
+
+        if (string.IsNullOrEmpty(newImageData.Explanation) && string.IsNullOrEmpty(newImageData.Title))
+        {
+            return;
+        }
+
+        string fileName = "ExplanationFile.txt";
+
+        if (File.Exists(fileName))
+        {
+            File.Delete(fileName);
+        }
+        
+        string fullPath = MakeFileAndGetFullPath("ExplanationFile.txt");
+
+        
+        
+        WriteToFileWithPathAndText(fullPath, newImageData.Title);
+        WriteToFileWithPathAndText(fullPath, newImageData.Explanation);
+    }
+
+    private void WriteToFileWithPathAndText(string fullPath, string contentToWrite)
+    {
+        string[] splitForReadAbility = Regex.Split(contentToWrite, @"(?<=[.])");
+        
+        using TextWriter writer = new StreamWriter(fullPath, true);
+        
+        foreach (string stringSegment in splitForReadAbility)
+        {
+            writer.WriteLine(stringSegment.Trim());
+        }
+        writer.WriteLine(Environment.NewLine);
+
+    }
+
     /**
      * Abit of a workaround, but works i guess
      */
-    private string MakeFileAndGetFullPath()
+    private string MakeFileAndGetFullPath(string fileName)
     {
-        File.Create("Image.jpg").Dispose();
+        File.Create(fileName).Dispose();
 
-        string fullPath = Path.GetFullPath("Image.jpg");
+        string fullPath = Path.GetFullPath(fileName);
         return fullPath;
     }
 

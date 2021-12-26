@@ -3,4 +3,5 @@
 public interface IBackGroundService
 {
     Task GetImage();
+    Task WriteExplanationAndTitle();
 }

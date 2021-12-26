@@ -5,5 +5,4 @@ IBackGroundService backGroundService = FactoryNASAServices.GetBackGroundService(
 
 
 await backGroundService.GetImage();
-
-Console.WriteLine("Done");
+await backGroundService.WriteExplanationAndTitle();

@@ -11,7 +11,7 @@ namespace NASANetworking;
 public class Credentials
 {
     public const string ApiKey = "Your_Key_Here";
-    }
+}
 ```
 
-There is also a relative path in BackGroundService, here create a jpg file and put in the path
+The projects is my first attempt at making something executable, therefore it is just a small fun project.  

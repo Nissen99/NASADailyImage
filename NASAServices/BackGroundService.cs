@@ -1,9 +1,7 @@
 ﻿using NASANetworking;
 using Shared;
 using System.Net;
-
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
 
@@ -40,7 +38,6 @@ public class BackGroundService : IBackGroundService
 
         if ("video".Equals(newImageData.Media_type))
         {
-            Console.WriteLine("Today was video");
             return;
         }
         
@@ -82,6 +79,7 @@ public class BackGroundService : IBackGroundService
         
         WriteToFileWithPathAndText(fullPath, newImageData.Title);
         WriteToFileWithPathAndText(fullPath, newImageData.Explanation);
+        WriteToFileWithPathAndText(fullPath, newImageData.Url.ToString());
     }
 
     private void WriteToFileWithPathAndText(string fullPath, string contentToWrite)

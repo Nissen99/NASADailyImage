@@ -3,18 +3,12 @@ using Shared;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using Microsoft.Win32;
-
 
 namespace NASADailyImage;
 
 public class BackGroundService : IBackGroundService
 {
-    
-    private const int SPI_SETDESKWALLPAPER = 20;
-    private const int SPIF_UPDATEINIFILE = 0x01;
-    private const int SPIF_SENDWININICHANGE = 0x02;
-    
+ 
     private INASADailyImageClient nasaClient;
     public BackGroundService(INASADailyImageClient nasaDailyImageClient)
     {
@@ -46,13 +40,8 @@ public class BackGroundService : IBackGroundService
         var fullPath = MakeFileAndGetFullPath("Image.jpg");
 
         await webClient.DownloadFileTaskAsync(newImageData.HDUrl, fullPath) ;
-
-        setStyleOfWallpaper();
         
-        SystemParametersInfo(SPI_SETDESKWALLPAPER,
-            0,
-            fullPath,
-            SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
+        setWallpaper(fullPath);
 
        File.Delete(fullPath);
     }
@@ -95,6 +84,13 @@ public class BackGroundService : IBackGroundService
         writer.WriteLine(Environment.NewLine);
 
     }
+    
+    //Change desktop wallpaper to given jpg file and stretch it to fit the screen. 
+    private void setWallpaper(string filePath)
+    {
+        SystemParametersInfo(20, 0, filePath, 0x01 | 0x02);
+    }
+    
 
     /**
      * Abit of a workaround, but works i guess
@@ -107,13 +103,5 @@ public class BackGroundService : IBackGroundService
         return fullPath;
     }
 
-    /**
-     *  RegistryKey, used to set style
-     * 2.ToString = Stretched
-     */
-    private void setStyleOfWallpaper()
-    {
-        RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
-        key.SetValue(@"WallpaperStyle", 2.ToString());
-    }
+
 }
